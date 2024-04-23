@@ -1,0 +1,46 @@
+﻿@using ProjetoUsuariosClassLibrary.Entidade;
+@model ProjetoUsuariosClassLibrary.Entidade.Usuarios
+
+@{
+    ViewBag.Title = "Cadastro usuario";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <label for="Nome">Name:</label>
+    <input type="text" id="txtNome" name="Nome" required>
+</div>
+<div>
+    <label for="Email">Email:</label>
+    <input type="email" id="txtEmail" name="Email" required>
+</div>
+<button type="submit" id="btnSalvarCadastro">Salvar</button>
+<div id="msg"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+     $(document).ready(function () {
+         $("#btnSalvarCadastro").click(function () {
+                var nome = $("#txtNome").val();
+                var email = $("#txtEmail").val();
+
+                $.ajax({
+                    url: '@Url.Action("CreateUsuario", "Cadastro")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { nome: nome, email: email },
+                    success: function (result) {
+                        if (result.sucesso) {
+                            $("#msg").text("Cadastro realizado com sucesso!");
+                        } else {
+                            $("#msg").text("Ocorreu um erro ao cadastrar.");
+                        }
+                    },
+                    error: function () {
+                        $("#msg").text("Erro de comunicação com o servidor.");
+                    }
+                });
+            });
+        });
+</script>
