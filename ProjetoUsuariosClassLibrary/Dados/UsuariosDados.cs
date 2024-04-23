@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace ProjetoUsuariosClassLibrary.Dados
     {
         internal void CreateUsuario(Usuarios usuario)
         {
-            OracleCommand command = new OracleCommand();
+            SqlCommand command = new SqlCommand();
             command.CommandText = "procedure aqui";
             command.Parameters.Add(DAO.RetornaDbParameter(@usuario.Nome, usuario.Nome, DbType.String));
             command.Parameters.Add(DAO.RetornaDbParameter(@usuario.Email, usuario.Email, DbType.String));
