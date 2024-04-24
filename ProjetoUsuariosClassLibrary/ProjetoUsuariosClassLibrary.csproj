@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dados\CarroDados.cs" />
     <Compile Include="Dados\UsuariosDados.cs" />
+    <Compile Include="Entidade\Carro.cs" />
     <Compile Include="Entidade\Usuarios.cs" />
+    <Compile Include="Negocios\CarroNegocios.cs" />
     <Compile Include="Negocios\UsuarioNegocios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

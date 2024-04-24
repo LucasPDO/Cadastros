@@ -1,0 +1,55 @@
+﻿@using ProjetoUsuariosClassLibrary.Entidade;
+@model ProjetoUsuariosClassLibrary.Entidade.Carro
+
+@{
+    ViewBag.Title = "Cadastro Carro";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <label for="Marca">Marca:</label>
+    <input type="text" id="txtMarca" name="Marca" required>
+</div>
+<div>
+    <label for="Modelo">Modelo:</label>
+    <input type="text" id="txtModelo" name="Modelo" required>
+</div>
+<div>
+    <label for="Cor">Cor:</label>
+    <input type="text" id="txtCor" name="Cor" required>
+</div>
+<div>
+    <label for="Ano">Ano:</label>
+    <input type="text" id="txtAno" name="Ano" required>
+</div>
+<button type="submit" id="btnSalvarCarro">Salvar</button>
+<div id="msg"></div>
+
+<script>
+     $(document).ready(function () {
+         $("#btnSalvarCarro").click(function () {
+                var marca = $("#txtMarca").val();
+                var modelo = $("#txtModelo").val();
+             var cor = $("#txtCor").val();
+             var ano = $("#txtAno").val();
+
+                $.ajax({
+                    url: '@Url.Action("CreateCarro", "Carro")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { marca: marca, modelo: modelo, cor: cor, ano: ano },
+                    success: function (result) {
+                        if (result.sucesso) {
+                            $("#msg").text("Cadastro realizado com sucesso!");
+                        } else {
+                            $("#msg").text("Ocorreu um erro ao cadastrar.");
+                        }
+                    },
+                    error: function () {
+                        $("#msg").text("Erro de comunicação com o servidor.");
+                    }
+                });
+            });
+        });
+</script>
