@@ -16,7 +16,27 @@
     <input type="email" id="txtEmail" name="Email" required>
 </div>
 <button type="submit" id="btnSalvarCadastro">Salvar</button>
+<button type="button" id="btnAbrirModal">Ver Cadastros</button> <!-- Botão para abrir o modal -->
+
 <div id="msg"></div>
+<!-- Modal -->
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <!-- Conteúdo do modal -->
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lista de cadastros</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Segue abaixo a lista dos cadastros realizados:</p>
+                <ul id="listaCadastros"></ul> <!-- Lista de cadastros -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
      $(document).ready(function () {
@@ -30,8 +50,12 @@
                     dataType: 'json',
                     data: { nome: nome, email: email },
                     success: function (result) {
-                        if (result.sucesso) {
+                        if (!result.sucesso) {
                             $("#msg").text("Cadastro realizado com sucesso!");
+                            //Limpa os campos
+                            $("#txtNome").val('');
+                            $("#txtEmail").val('');
+
                         } else {
                             $("#msg").text("Ocorreu um erro ao cadastrar.");
                         }
@@ -41,5 +65,39 @@
                     }
                 });
             });
+
+        // Ao clicar no botão "Ver Cadastros", abrir o modal e carregar a lista de cadastros
+        $("#btnAbrirModal").click(function() {
+            $("#myModal").css("display", "block");
+            $.ajax({
+                url: '@Url.Action("ListarUsuarios", "Cadastro")',
+                type: 'GET',
+                dataType: 'json',
+                success: function (usuarios) {
+                    var lista = $("#listaCadastros");
+                    lista.empty(); // Limpa a lista antes de adicionar os itens
+
+                    // Adiciona cada usuário à lista
+                    $.each(usuarios, function(index, usuario) {
+                        lista.append("<li>" + usuario.Nome + " - " + usuario.Email + "</li>");
+                    });
+                },
+                error: function () {
+                    alert("Erro ao carregar lista de cadastros.");
+                }
+            });
         });
+
+        // Fechar o modal quando clicar no botão de fechar (X)
+        $(".close").click(function() {
+            $("#myModal").css("display", "none");
+        });
+
+        // Fechar o modal quando clicar fora dele
+        $(window).click(function(event) {
+            if (event.target == $("#myModal")[0]) {
+                $("#myModal").css("display", "none");
+            }
+        });
+    });
 </script>

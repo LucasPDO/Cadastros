@@ -15,11 +15,11 @@ namespace ProjetoUsuariosClassLibrary.Dados
         internal void CreateCarro(Carro carro)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "procedure aqui";
-            command.Parameters.Add(DAO.RetornaDbParameter(@carro.Marca, carro.Marca, DbType.String));
-            command.Parameters.Add(DAO.RetornaDbParameter(@carro.Modelo, carro.Modelo, DbType.String));
-            command.Parameters.Add(DAO.RetornaDbParameter(@carro.Cor, carro.Cor, DbType.String));
-            command.Parameters.Add(DAO.RetornaDbParameter(Convert.ToString(@carro.Ano), carro.Ano, DbType.Int32));
+            command.CommandText = "InserirCarro";
+            command.Parameters.Add("@Marca", SqlDbType.NVarChar, 100).Value = carro.Marca;
+            command.Parameters.Add("@Modelo", SqlDbType.NVarChar, 100).Value = carro.Modelo;
+            command.Parameters.Add("@Cor", SqlDbType.NVarChar, 100).Value = carro.Cor;
+            command.Parameters.Add("@Ano", SqlDbType.NVarChar, 100).Value = carro.Ano;
             DAO.ExecutaProcedure(command);
         }
     }

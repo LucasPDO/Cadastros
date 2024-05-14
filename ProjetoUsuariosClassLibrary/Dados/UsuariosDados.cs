@@ -1,6 +1,7 @@
 ﻿using AcessoDadosClassLibrary;
 using ProjetoUsuariosClassLibrary.Entidade;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
@@ -13,14 +14,17 @@ namespace ProjetoUsuariosClassLibrary.Dados
 {
     public class UsuariosDados
     {
+
         internal void CreateUsuario(Usuarios usuario)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "procedure aqui";
-            command.Parameters.Add(DAO.RetornaDbParameter(@usuario.Nome, usuario.Nome, DbType.String));
-            command.Parameters.Add(DAO.RetornaDbParameter(@usuario.Email, usuario.Email, DbType.String));
+            command.CommandText = "CadastrarNomeEmail";
+            command.Parameters.Add("@Nome", SqlDbType.NVarChar, 100).Value = usuario.Nome;
+            command.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = usuario.Email;
             DAO.ExecutaProcedure(command);
         }
+       
+
 
     }
 }

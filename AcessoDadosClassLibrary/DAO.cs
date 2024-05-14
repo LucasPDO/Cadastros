@@ -11,7 +11,10 @@ namespace AcessoDadosClassLibrary
 {
     public class DAO
     {
-        public static string connectionString = "coloque_sua_connection_string_aqui";
+        //Casa
+        public static string connectionString = @"Data Source=DESKTOP-GO38MJK\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
+        //Ape
+        //public static string connectionString = @"Data Source=DESKTOP-GO38MJK\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
 
         public static DbConnection _DbConnection;
 
@@ -137,6 +140,7 @@ namespace AcessoDadosClassLibrary
                 command.ExecuteNonQuery();
             }
         }
+      
 
         public static DbParameter RetornaDbParameter(string nomeParametro, object valorParametro, DbType tipoParametro, int value = 0, ParameterDirection direction = ParameterDirection.Input)
         {

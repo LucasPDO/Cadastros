@@ -30,5 +30,21 @@ namespace CadastroUsers.Controllers
             }
            
         }
+
+        //public ActionResult ListarUsuarios()
+        //{
+        //    try
+        //    {
+        //        // Chame o método no seu negócio ou serviço que retorna a lista de usuários
+        //        new UsuarioNegocios().ListarUsuarios();
+
+        //       
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Se ocorrer algum erro, retorne um JSON indicando o erro
+        //        return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
     }
 }

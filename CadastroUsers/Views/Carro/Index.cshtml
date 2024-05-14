@@ -40,8 +40,12 @@
                     dataType: 'json',
                     data: { marca: marca, modelo: modelo, cor: cor, ano: ano },
                     success: function (result) {
-                        if (result.sucesso) {
+                        if (!result.sucesso) {
                             $("#msg").text("Cadastro realizado com sucesso!");
+                            $("#txtMarca").val('');
+                            $("#txtModelo").val('');
+                            $("#txtCor").val('');
+                            $("#txtAno").val('');
                         } else {
                             $("#msg").text("Ocorreu um erro ao cadastrar.");
                         }

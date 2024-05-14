@@ -20,7 +20,6 @@ namespace CadastroUsers.Controllers
             try
             {
                 new CarroNegocios().CreateCarro(carro);
-
                 return new JsonResult() { Data = new { Success = true } };
             }
             catch (ValidationException ex)

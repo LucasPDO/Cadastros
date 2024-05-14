@@ -25,5 +25,6 @@ namespace ProjetoUsuariosClassLibrary.Negocios
 
             new UsuariosDados().CreateUsuario(usuario);
         }
+       
     }
 }
